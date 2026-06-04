@@ -7,3 +7,9 @@ def index(request):
 def cart(request):
     return render(request, 'cart.html')
 
+def contact(request):
+    return render(request, 'Contac.html')
+
+def error_404(request):
+    return render(request, '404.html') 
+
