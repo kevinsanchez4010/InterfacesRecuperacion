@@ -166,26 +166,26 @@
                     <div class="collapse navbar-collapse" id="navbarCollapse">
                         <div class="navbar-nav ms-auto py-0">
                             <a href="{% url 'index' %}" class="nav-item nav-link active">Home</a>
-                            <a href="{% url 'shop' %}" class="nav-item nav-link">Shop</a>
+                            <a href="{% url 'index' %}" class="nav-item nav-link">Shop</a>
                             <a href="{% url 'index' %}" class="nav-item nav-link">Single Page</a>
                             <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
                                 <div class="dropdown-menu m-0">
                                     <a href="{% url 'index' %}" class="dropdown-item">Bestseller</a>
-                                    <a href="{% url 'cart' %}" class="dropdown-item">Cart Page</a>
+                                    <a href="{% url 'index' %}" class="dropdown-item">Cart Page</a>
                                     <a href="{% url 'index' %}" class="dropdown-item">Checkout</a>
-                                    <a href="{% url '404' %}" class="dropdown-item">404 Page</a>
+                                    <a href="{% url 'index' %}" class="dropdown-item">404 Page</a>
                             <a href="{#}" class="nav-item nav-link">Single Page</a>
                             <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
                                 <div class="dropdown-menu m-0">
                                     <a href="{#}" class="dropdown-item">Bestseller</a>
-                                    <a href="{% url 'cart' %}" class="dropdown-item">Cart Page</a>
+                                    <a href="{% url 'index' %}" class="dropdown-item">Cart Page</a>
                                     <a href="{#}" class="dropdown-item">Checkout</a>
                                     <a href="{#}" class="dropdown-item">404 Page</a>
                                 </div>
                             </div>
-                            <a href="{% url 'contact' %}" class="nav-item nav-link me-2">Contact</a>
+                            <a href="{% url 'index' %}" class="nav-item nav-link me-2">Contact</a>
                             <div class="nav-item dropdown d-block d-lg-none mb-3">
                                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">All Category</a>
                                 <div class="dropdown-menu m-0">
@@ -248,7 +248,7 @@
                             <h2 class="display-3 text-capitalize mb-4 wow fadeInRight" data-wow-delay="0.3s">En Laptops y Smartphones Seleccionados</h2>
                             <p class="text-dark wow fadeInRight" data-wow-delay="0.5s">Oferta válida para productos seleccionados. Consulta términos y condiciones.</p>
                             <a class="btn btn-primary rounded-pill py-3 px-5 wow fadeInRight" data-wow-delay="0.7s"
-                                href="{% url 'shop' %}" aria-label="Ver ofertas">Comprar Ahora</a>
+                                href="{% url 'index' %}" aria-label="Ver ofertas">Comprar Ahora</a>
                         </div>
                     </div>
                     <div class="row g-0 header-carousel-item align-items-center">
@@ -261,7 +261,7 @@
                             <h2 class="display-3 text-capitalize mb-4 wow fadeInRight" data-wow-delay="0.3s">En Tecnología y Electrónica</h2>
                             <p class="text-dark wow fadeInRight" data-wow-delay="0.5s">Oferta válida para productos seleccionados. Consulta términos y condiciones.</p>
                             <a class="btn btn-primary rounded-pill py-3 px-5 wow fadeInRight" data-wow-delay="0.7s"
-                                href="{% url 'shop' %}" aria-label="Ver ofertas">Comprar Ahora</a>
+                                href="{% url 'index' %}" aria-label="Ver ofertas">Comprar Ahora</a>
                         </div>
                     </div>
                 </div>
@@ -275,12 +275,12 @@
                     </div>
                     <div class="carousel-banner">
                         <div class="carousel-banner-content text-center p-4">
-                            <a href="{% url 'shop' %}" class="d-block mb-2">Tablets</a>
-                            <a href="{% url 'shop' %}" class="d-block text-white fs-3">Apple iPad Mini <br> G2356</a>
+                            <a href="{% url 'index' %}" class="d-block mb-2">Tablets</a>
+                            <a href="{% url 'index' %}" class="d-block text-white fs-3">Apple iPad Mini <br> G2356</a>
                             <del class="me-2 text-white fs-5">$1.250,00</del>
                             <span class="text-primary fs-5">$1.050,00</span>
                         </div>
-                        <a href="{% url 'cart' %}" class="btn btn-primary rounded-pill py-2 px-4" aria-label="Agregar iPad al carrito"><i
+                        <a href="{% url 'index' %}" class="btn btn-primary rounded-pill py-2 px-4" aria-label="Agregar iPad al carrito"><i
                                 class="fas fa-shopping-cart me-2"></i>Agregar al Carrito</a>
                     </div>
                 </div>
@@ -367,7 +367,7 @@
         <div class="container">
             <div class="row g-4">
                 <article class="col-lg-6 wow fadeInLeft" data-wow-delay="0.2s">
-                    <a href="{% url 'shop' %}" class="d-flex align-items-center justify-content-between border bg-white rounded p-4" title="Ver cámara inteligente">
+                    <a href="{% url 'index' %}" class="d-flex align-items-center justify-content-between border bg-white rounded p-4" title="Ver cámara inteligente">
                         <div>
                             <p class="text-muted mb-3">¡Encuentra la mejor cámara para ti!</p>
                             <h3 class="text-primary">Cámara Inteligente</h3>
@@ -378,7 +378,7 @@
                     </a>
                 </article>
                 <article class="col-lg-6 wow fadeInRight" data-wow-delay="0.3s">
-                    <a href="{% url 'shop' %}" class="d-flex align-items-center justify-content-between border bg-white rounded p-4" title="Ver reloj inteligente">
+                    <a href="{% url 'index' %}" class="d-flex align-items-center justify-content-between border bg-white rounded p-4" title="Ver reloj inteligente">
                         <div>
                             <p class="text-muted mb-3">¡Encuentra el mejor reloj para ti!</p>
                             <h3 class="text-primary">Reloj Inteligente</h3>
