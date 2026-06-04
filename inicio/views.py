@@ -11,7 +11,7 @@ def contact(request):
     return render(request, 'contact.html')
 
 def error_404(request):
-    return render(request, '404.htm') 
+    return render(request, '404.html') 
 
 def shop(request):
     return render(request, 'shop.html')
