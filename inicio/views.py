@@ -8,7 +8,7 @@ def cart(request):
     return render(request, 'cart.html')
 
 def contact(request):
-    return render(request, 'Contac.html')
+    return render(request, 'contact.html')
 
 def error_404(request):
     return render(request, '404.htm') 
