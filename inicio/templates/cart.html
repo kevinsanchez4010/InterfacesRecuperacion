@@ -1,5 +1,147 @@
 {% load static %}
 {% include 'header.html' %}
+<body>
+    <!-- Topbar Start -->
+    <div class="container-fluid px-5 d-none border-bottom d-lg-block">
+        <div class="row gx-0 align-items-center">
+            <div class="col-lg-4 text-center text-lg-start mb-lg-0">
+                <div class="d-inline-flex align-items-center" style="height: 45px;">
+                    <a href="{% url 'contact' %}" class="text-muted me-2">Ayuda</a><small> / </small>
+                    <a href="{% url 'contact' %}" class="text-muted mx-2">Soporte</a><small> / </small>
+                    <a href="{% url 'contact' %}" class="text-muted ms-2">Contacto</a>
+                </div>
+            </div>
+            <div class="col-lg-4 text-center d-flex align-items-center justify-content-center">
+                <small class="text-dark">Llamanos:</small>
+                <a href="tel:+593991982223" class="text-muted ms-2">+593 99 198 2223</a>
+            </div>
+
+            <div class="col-lg-4 text-center text-lg-end">
+                <div class="d-inline-flex align-items-center" style="height: 45px;">
+                    <div class="dropdown">
+                        <a href="#" class="dropdown-toggle text-muted me-2" data-bs-toggle="dropdown"><small>USD</small></a>
+                        <div class="dropdown-menu rounded">
+                            <a href="#" class="dropdown-item">Euro</a>
+                            <a href="#" class="dropdown-item">Dólar USD</a>
+                        </div>
+                    </div>
+                    <div class="dropdown">
+                        <a href="#" class="dropdown-toggle text-muted mx-2" data-bs-toggle="dropdown"><small>Español</small></a>
+                        <div class="dropdown-menu rounded">
+                            <a href="#" class="dropdown-item">Español</a>
+                            <a href="#" class="dropdown-item">Inglés</a>
+                            <a href="#" class="dropdown-item">Portugués</a>
+                        </div>
+                    </div>
+                    {% if user.is_authenticated %}
+                    <div class="dropdown">
+                        <a href="#" class="dropdown-toggle text-muted ms-2" data-bs-toggle="dropdown"><small><i class="fa fa-user-circle me-2"></i>{{ user.username }}</small></a>
+                        <div class="dropdown-menu rounded">
+                            <a href="{% url 'dashboard' %}" class="dropdown-item"><i class="fas fa-tachometer-alt me-2"></i>Mi Panel</a>
+                            <a href="#" class="dropdown-item"><i class="fas fa-heart me-2"></i>Favoritos</a>
+                            <a href="{% url 'cart' %}" class="dropdown-item"><i class="fas fa-shopping-cart me-2"></i>Mi Carrito</a>
+                            <a href="#" class="dropdown-item"><i class="fas fa-bell me-2"></i>Notificaciones</a>
+                            <hr class="dropdown-divider">
+                            <a href="{% url 'logout' %}" class="dropdown-item"><i class="fas fa-sign-out-alt me-2"></i>Cerrar Sesión</a>
+                        </div>
+                    </div>
+                    {% else %}
+                    <a href="{% url 'login' %}" class="btn btn-sm btn-primary rounded-pill px-3 ms-2"><i class="fas fa-sign-in-alt me-1"></i>Iniciar Sesión</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid px-5 py-4 d-none d-lg-block">
+        <div class="row gx-0 align-items-center text-center">
+            <div class="col-md-4 col-lg-3 text-center text-lg-start">
+                <div class="d-inline-flex align-items-center">
+                    <a href="{% url 'index' %}" class="navbar-brand p-0" title="Ir a inicio">
+                        <h1 class="display-5 text-primary m-0"><i class="fas fa-shopping-bag text-secondary me-2" aria-hidden="true"></i>ElectroVolt</h1>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-4 col-lg-6 text-center">
+                <div class="position-relative ps-4">
+                    <form class="d-flex border rounded-pill" role="search">
+                        <input class="form-control border-0 rounded-pill w-100 py-3" type="search"
+                            placeholder="¿Qué buscas?" aria-label="Buscar productos">
+                        <select class="form-select text-dark border-0 border-start rounded-0 p-3" style="width: 200px;" aria-label="Categorías">
+                            <option value="all">Todas las categorías</option>
+                            <option value="smartphones">Smartphones</option>
+                            <option value="laptops">Laptops</option>
+                            <option value="tablets">Tablets</option>
+                            <option value="accesorios">Accesorios</option>
+                        </select>
+                        <button type="submit" class="btn btn-primary rounded-pill py-3 px-5" style="border: 0;" aria-label="Buscar"><i class="fas fa-search"></i></button>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-4 col-lg-3 text-center text-lg-end">
+                <div class="d-inline-flex align-items-center">
+                    <a href="#" class="text-muted d-flex align-items-center justify-content-center me-3" title="Comparar productos"><span class="rounded-circle btn-md-square border"><i class="fas fa-random" aria-hidden="true"></i></span></a>
+                    <a href="#" class="text-muted d-flex align-items-center justify-content-center me-3" title="Mis favoritos"><span class="rounded-circle btn-md-square border"><i class="fas fa-heart" aria-hidden="true"></i></span></a>
+                    <a href="{% url 'cart' %}" class="text-muted d-flex align-items-center justify-content-center" title="Ver carrito"><span class="rounded-circle btn-md-square border"><i class="fas fa-shopping-cart" aria-hidden="true"></i></span>
+                        <span class="text-dark ms-2">$0.00</span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navbar Start -->
+    <div class="container-fluid nav-bar p-0">
+        <div class="row gx-0 bg-primary px-5 align-items-center">
+            <div class="col-lg-3 d-none d-lg-block">
+                <nav class="navbar navbar-light position-relative" style="width: 250px;">
+                    <button class="navbar-toggler border-0 fs-4 w-100 px-0 text-start" type="button"
+                        data-bs-toggle="collapse" data-bs-target="#allCat">
+                        <h4 class="m-0"><i class="fa fa-bars me-2"></i>Categorías</h4>
+                    </button>
+                    <div class="collapse navbar-collapse rounded-bottom" id="allCat">
+                        <div class="navbar-nav ms-auto py-0">
+                            <ul class="list-unstyled categories-bars">
+                                <li><a href="#">Accesorios (3)</a></li>
+                                <li><a href="#">Electrónica y Computadoras (5)</a></li>
+                                <li><a href="#">Laptops y Desktops (2)</a></li>
+                                <li><a href="#">Celulares y Tablets (8)</a></li>
+                                <li><a href="#">Smartphones y Smart TV (5)</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+            <div class="col-12 col-lg-9">
+                <nav class="navbar navbar-expand-lg navbar-light bg-primary">
+                    <a href="{% url 'index' %}" class="navbar-brand d-block d-lg-none">
+                        <h1 class="display-5 text-secondary m-0"><i class="fas fa-shopping-bag text-white me-2"></i>ElectroVolt</h1>
+                    </a>
+                    <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                        <span class="fa fa-bars fa-1x"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarCollapse">
+                        <div class="navbar-nav ms-auto py-0">
+                            <a href="{% url 'index' %}" class="nav-item nav-link">Inicio</a>
+                            <a href="{% url 'shop' %}" class="nav-item nav-link">Tienda</a>
+                            <a href="#" class="nav-item nav-link">Productos</a>
+                            <div class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Más</a>
+                                <div class="dropdown-menu m-0">
+                                    <a href="#" class="dropdown-item">Bestsellers</a>
+                                    <a href="{% url 'cart' %}" class="dropdown-item active">Mi Carrito</a>
+                                    <a href="#" class="dropdown-item">Checkout</a>
+                                    <a href="#" class="dropdown-item">404</a>
+                                </div>
+                            </div>
+                            <a href="{% url 'contact' %}" class="nav-item nav-link me-2">Contacto</a>
+                        </div>
+                        <a href="{% url 'login' %}" class="btn btn-secondary rounded-pill py-2 px-4 px-lg-3 mb-3 mb-md-3 mb-lg-0"><i class="fas fa-sign-in-alt me-2"></i>Iniciar Sesión</a>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <!-- Navbar End -->
+
 <!-- Cart Page Start -->
     <div class="container-fluid py-5">
         <div class="container py-5">

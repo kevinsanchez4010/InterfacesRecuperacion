@@ -1,0 +1,329 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Dashboard - ElectroVolt</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Panel privado de usuario - ElectroVolt">
+    <meta name="robots" content="noindex, nofollow">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Bootstrap CSS -->
+    <link href="{% static 'public/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'public/css/style.css' %}" rel="stylesheet">
+
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .dashboard-container {
+            background: #f8f9fa;
+            border-radius: 10px;
+            box-shadow: 0 0 30px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .sidebar {
+            background: linear-gradient(180deg, #1f3a93 0%, #2d5aa7 100%);
+            min-height: 100vh;
+            padding: 30px 0;
+        }
+        
+        .sidebar .user-info {
+            padding: 30px 20px;
+            border-bottom: 2px solid rgba(255,255,255,0.1);
+            text-align: center;
+            color: white;
+        }
+        
+        .sidebar .user-avatar {
+            width: 80px;
+            height: 80px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-size: 40px;
+            color: #667eea;
+        }
+        
+        .sidebar .nav-menu a {
+            color: rgba(255,255,255,0.8);
+            padding: 15px 25px;
+            display: block;
+            transition: all 0.3s;
+            border-left: 4px solid transparent;
+        }
+        
+        .sidebar .nav-menu a:hover,
+        .sidebar .nav-menu a.active {
+            background: rgba(255,255,255,0.1);
+            color: white;
+            border-left-color: #ffc107;
+        }
+        
+        .sidebar .nav-menu a i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+        
+        .main-content {
+            padding: 40px;
+        }
+        
+        .card-stat {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
+            margin-bottom: 25px;
+        }
+        
+        .card-stat:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+        }
+        
+        .card-stat .icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
+        
+        .welcome-banner {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .logout-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+        
+        @media (max-width: 768px) {
+            .sidebar {
+                min-height: auto;
+            }
+            
+            .logout-btn {
+                position: static;
+                width: auto;
+                border-radius: 5px;
+                padding: 10px 20px;
+                margin-top: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="row g-0" style="min-height: 100vh;">
+        <!-- Sidebar -->
+        <div class="col-lg-3 sidebar" role="navigation" aria-label="Menú lateral">
+            <div class="user-info">
+                <div class="user-avatar">
+                    <i class="fas fa-user"></i>
+                </div>
+                <h5 class="mb-1">{{ user.first_name|default:user.username }}</h5>
+                <p class="mb-0 small">{{ user.email }}</p>
+            </div>
+
+            <nav class="nav-menu">
+                <a href="#" class="active" aria-current="page">
+                    <i class="fas fa-home"></i> Dashboard
+                </a>
+                <a href="#profile">
+                    <i class="fas fa-user-circle"></i> Mi Perfil
+                </a>
+                <a href="#orders">
+                    <i class="fas fa-shopping-bag"></i> Mis Pedidos
+                </a>
+                <a href="#wishlist">
+                    <i class="fas fa-heart"></i> Mi Lista de Deseos
+                </a>
+                <a href="#addresses">
+                    <i class="fas fa-map-marker-alt"></i> Direcciones
+                </a>
+                <a href="#settings">
+                    <i class="fas fa-cog"></i> Configuración
+                </a>
+            </nav>
+        </div>
+
+        <!-- Main Content -->
+        <div class="col-lg-9">
+            <div class="main-content">
+                <!-- Welcome Banner -->
+                <div class="welcome-banner">
+                    <div class="row align-items-center">
+                        <div class="col-md-8">
+                            <h2 class="mb-2">¡Bienvenido, {{ user.first_name|default:user.username }}!</h2>
+                            <p class="mb-0">Accede a tu panel privado y gestiona tu cuenta en ElectroVolt</p>
+                        </div>
+                        <div class="col-md-4 text-md-end mt-3 mt-md-0">
+                            <a href="{% url 'index' %}" class="btn btn-light btn-sm">
+                                <i class="fas fa-arrow-left me-2"></i>Volver a la tienda
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stats Cards -->
+                <div class="row">
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card card-stat">
+                            <div class="card-body">
+                                <div class="icon text-primary">
+                                    <i class="fas fa-shopping-bag"></i>
+                                </div>
+                                <h5 class="card-title">Mis Pedidos</h5>
+                                <p class="card-text display-6 text-primary mb-0">0</p>
+                                <small class="text-muted">Pedidos realizados</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card card-stat">
+                            <div class="card-body">
+                                <div class="icon text-success">
+                                    <i class="fas fa-heart"></i>
+                                </div>
+                                <h5 class="card-title">Favoritos</h5>
+                                <p class="card-text display-6 text-success mb-0">0</p>
+                                <small class="text-muted">Productos guardados</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card card-stat">
+                            <div class="card-body">
+                                <div class="icon text-warning">
+                                    <i class="fas fa-coins"></i>
+                                </div>
+                                <h5 class="card-title">Puntos</h5>
+                                <p class="card-text display-6 text-warning mb-0">0</p>
+                                <small class="text-muted">Puntos acumulados</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Activity -->
+                <div class="row mt-4">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header bg-primary text-white">
+                                <h5 class="mb-0">
+                                    <i class="fas fa-clock me-2"></i>Actividad Reciente
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="alert alert-info">
+                                    <i class="fas fa-info-circle me-2"></i>
+                                    No hay actividad reciente. ¡Comienza a comprar en ElectroVolt!
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Account Info -->
+                <div class="row mt-4">
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-header bg-primary text-white">
+                                <h5 class="mb-0">
+                                    <i class="fas fa-user-circle me-2"></i>Información de Cuenta
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <p>
+                                    <strong>Nombre:</strong> {{ user.first_name|default:"No especificado" }}
+                                </p>
+                                <p>
+                                    <strong>Apellido:</strong> {{ user.last_name|default:"No especificado" }}
+                                </p>
+                                <p>
+                                    <strong>Email:</strong> {{ user.email|default:"No especificado" }}
+                                </p>
+                                <p>
+                                    <strong>Usuario:</strong> {{ user.username }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-header bg-primary text-white">
+                                <h5 class="mb-0">
+                                    <i class="fas fa-key me-2"></i>Seguridad
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <p class="text-muted">Última vez que iniciaste sesión:</p>
+                                <p class="mb-3">{{ user.last_login|date:"d/m/Y H:i"|default:"Primer acceso" }}</p>
+                                
+                                <button class="btn btn-outline-primary btn-sm">
+                                    <i class="fas fa-key me-2"></i>Cambiar Contraseña
+                                </button>
+                                <a href="{% url 'logout' %}" class="btn btn-outline-danger btn-sm ms-2">
+                                    <i class="fas fa-sign-out-alt me-2"></i>Cerrar Sesión
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Logout Button (Mobile) -->
+    <a href="{% url 'logout' %}" class="btn btn-danger logout-btn d-lg-none" title="Cerrar sesión" aria-label="Cerrar sesión">
+        <i class="fas fa-sign-out-alt"></i>
+    </a>
+
+    <!-- Scripts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Smooth scroll para enlaces del menú
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                // Remover clase active de todos
+                document.querySelectorAll('.nav-menu a').forEach(l => l.classList.remove('active'));
+                // Agregar clase active al actual
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>

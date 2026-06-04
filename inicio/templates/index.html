@@ -6,50 +6,48 @@
         <div class="row gx-0 align-items-center">
             <div class="col-lg-4 text-center text-lg-start mb-lg-0">
                 <div class="d-inline-flex align-items-center" style="height: 45px;">
-                    <a href="#" class="text-muted me-2"> HOLA</a><small> / </small>
-                    <a href="#" class="text-muted mx-2"> COMIDA</a><small> / </small>
-                    <a href="#" class="text-muted ms-2"> CAMBIO NUMEROS</a>
-
+                    <a href="{% url 'contact' %}" class="text-muted me-2">Ayuda</a><small> / </small>
+                    <a href="{% url 'contact' %}" class="text-muted mx-2">Soporte</a><small> / </small>
+                    <a href="{% url 'contact' %}" class="text-muted ms-2">Contacto</a>
                 </div>
             </div>
             <div class="col-lg-4 text-center d-flex align-items-center justify-content-center">
                 <small class="text-dark">Llamanos:</small>
-                <a href="#" class="text-muted">TELEFONO</a>
+                <a href="tel:+593991982223" class="text-muted ms-2">+593 99 198 2223</a>
             </div>
 
             <div class="col-lg-4 text-center text-lg-end">
                 <div class="d-inline-flex align-items-center" style="height: 45px;">
                     <div class="dropdown">
-                        <a href="#" class="dropdown-toggle text-muted me-2" data-bs-toggle="dropdown"><small>
-                                USD</small></a>
+                        <a href="#" class="dropdown-toggle text-muted me-2" data-bs-toggle="dropdown"><small>USD</small></a>
                         <div class="dropdown-menu rounded">
-                            <a href="#" class="dropdown-item"> Euro</a>
-                            <a href="#" class="dropdown-item"> cambio dinero</a>
+                            <a href="#" class="dropdown-item">Euro</a>
+                            <a href="#" class="dropdown-item">Dólar USD</a>
                         </div>
                     </div>
                     <div class="dropdown">
-                        <a href="#" class="dropdown-toggle text-muted mx-2" data-bs-toggle="dropdown"><small>
-                                English</small></a>
+                        <a href="#" class="dropdown-toggle text-muted mx-2" data-bs-toggle="dropdown"><small>Español</small></a>
                         <div class="dropdown-menu rounded">
-                            <a href="#" class="dropdown-item"> English</a>
-                            <a href="#" class="dropdown-item"> Turkish</a>
-                            <a href="#" class="dropdown-item"> Spanol</a>
-                            <a href="#" class="dropdown-item"> cambio idioma</a>
+                            <a href="#" class="dropdown-item">Español</a>
+                            <a href="#" class="dropdown-item">Inglés</a>
+                            <a href="#" class="dropdown-item">Portugués</a>
                         </div>
                     </div>
+                    {% if user.is_authenticated %}
                     <div class="dropdown">
-                        <a href="#" class="dropdown-toggle text-muted ms-2" data-bs-toggle="dropdown"><small><i
-                                    class="fa fa-home me-2"></i> My Dashboard</small></a>
+                        <a href="#" class="dropdown-toggle text-muted ms-2" data-bs-toggle="dropdown"><small><i class="fa fa-user-circle me-2"></i>{{ user.username }}</small></a>
                         <div class="dropdown-menu rounded">
-                            <a href="#" class="dropdown-item"> Iniciar sesion</a>
-                            <a href="#" class="dropdown-item"> Wishlist</a>
-                            <a href="#" class="dropdown-item"> Mi carrito</a>
-                            <a href="#" class="dropdown-item"> Notificaciones</a>
-                            <a href="#" class="dropdown-item"> Configuracion</a>
-                            <a href="#" class="dropdown-item"> Mi cuenta</a>
-                            <a href="#" class="dropdown-item"> Cerrar Sesion</a>
+                            <a href="{% url 'dashboard' %}" class="dropdown-item"><i class="fas fa-tachometer-alt me-2"></i>Mi Panel</a>
+                            <a href="#" class="dropdown-item"><i class="fas fa-heart me-2"></i>Favoritos</a>
+                            <a href="{% url 'cart' %}" class="dropdown-item"><i class="fas fa-shopping-cart me-2"></i>Mi Carrito</a>
+                            <a href="#" class="dropdown-item"><i class="fas fa-bell me-2"></i>Notificaciones</a>
+                            <hr class="dropdown-divider">
+                            <a href="{% url 'logout' %}" class="dropdown-item"><i class="fas fa-sign-out-alt me-2"></i>Cerrar Sesión</a>
                         </div>
                     </div>
+                    {% else %}
+                    <a href="{% url 'login' %}" class="btn btn-sm btn-primary rounded-pill px-3 ms-2"><i class="fas fa-sign-in-alt me-1"></i>Iniciar Sesión</a>
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -58,38 +56,32 @@
         <div class="row gx-0 align-items-center text-center">
             <div class="col-md-4 col-lg-3 text-center text-lg-start">
                 <div class="d-inline-flex align-items-center">
-                    <a href="" class="navbar-brand p-0">
-                        <h1 class="display-5 text-primary m-0"><i
-                                class="fas fa-shopping-bag text-secondary me-2"></i>Electro</h1>
-                        <!-- <img src="img/logo.png" alt="Logo"> -->
+                    <a href="{% url 'index' %}" class="navbar-brand p-0" title="Ir a inicio">
+                        <h1 class="display-5 text-primary m-0"><i class="fas fa-shopping-bag text-secondary me-2" aria-hidden="true"></i>ElectroVolt</h1>
                     </a>
                 </div>
             </div>
             <div class="col-md-4 col-lg-6 text-center">
                 <div class="position-relative ps-4">
-                    <div class="d-flex border rounded-pill">
-                        <input class="form-control border-0 rounded-pill w-100 py-3" type="text"
-                            data-bs-target="#dropdownToggle123" placeholder="Search Looking For?">
-                        <select class="form-select text-dark border-0 border-start rounded-0 p-3" style="width: 200px;">
-                            <option value="All Category">Todas las categorias</option>
-                            <option value="Pest Control-2">Categoria 1</option>
-                            <option value="Pest Control-3">Categoria 2</option>
-                            <option value="Pest Control-4">Category 3</option>
-                            <option value="Pest Control-5">Category 4</option>
+                    <form class="d-flex border rounded-pill" role="search">
+                        <input class="form-control border-0 rounded-pill w-100 py-3" type="search"
+                            placeholder="¿Qué buscas?" aria-label="Buscar productos">
+                        <select class="form-select text-dark border-0 border-start rounded-0 p-3" style="width: 200px;" aria-label="Categorías">
+                            <option value="all">Todas las categorías</option>
+                            <option value="smartphones">Smartphones</option>
+                            <option value="laptops">Laptops</option>
+                            <option value="tablets">Tablets</option>
+                            <option value="accesorios">Accesorios</option>
                         </select>
-                        <button type="button" class="btn btn-primary rounded-pill py-3 px-5" style="border: 0;"><i
-                                class="fas fa-search"></i></button>
-                    </div>
+                        <button type="submit" class="btn btn-primary rounded-pill py-3 px-5" style="border: 0;" aria-label="Buscar"><i class="fas fa-search"></i></button>
+                    </form>
                 </div>
             </div>
             <div class="col-md-4 col-lg-3 text-center text-lg-end">
                 <div class="d-inline-flex align-items-center">
-                    <a href="#" class="text-muted d-flex align-items-center justify-content-center me-3"><span
-                            class="rounded-circle btn-md-square border"><i class="fas fa-random"></i></i></a>
-                    <a href="#" class="text-muted d-flex align-items-center justify-content-center me-3"><span
-                            class="rounded-circle btn-md-square border"><i class="fas fa-heart"></i></a>
-                    <a href="#" class="text-muted d-flex align-items-center justify-content-center"><span
-                            class="rounded-circle btn-md-square border"><i class="fas fa-shopping-cart"></i></span>
+                    <a href="#" class="text-muted d-flex align-items-center justify-content-center me-3" title="Comparar productos"><span class="rounded-circle btn-md-square border"><i class="fas fa-random" aria-hidden="true"></i></span></a>
+                    <a href="#" class="text-muted d-flex align-items-center justify-content-center me-3" title="Mis favoritos"><span class="rounded-circle btn-md-square border"><i class="fas fa-heart" aria-hidden="true"></i></span></a>
+                    <a href="{% url 'cart' %}" class="text-muted d-flex align-items-center justify-content-center" title="Ver carrito"><span class="rounded-circle btn-md-square border"><i class="fas fa-shopping-cart" aria-hidden="true"></i></span>
                         <span class="text-dark ms-2">$0.00</span></a>
                 </div>
             </div>
@@ -157,58 +149,50 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarCollapse">
                         <div class="navbar-nav ms-auto py-0">
-                            <a href="{% url 'index' %}" class="nav-item nav-link active">Home</a>
-                            <a href="{% url 'index' %}" class="nav-item nav-link">Shop</a>
-                            <a href="{% url 'index' %}" class="nav-item nav-link">Single Page</a>
+                            <a href="{% url 'index' %}" class="nav-item nav-link active">Inicio</a>
+                            <a href="{% url 'shop' %}" class="nav-item nav-link">Tienda</a>
+                            <a href="#" class="nav-item nav-link">Productos</a>
                             <div class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+                                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Más</a>
                                 <div class="dropdown-menu m-0">
-                                    <a href="{% url 'index' %}" class="dropdown-item">Bestseller</a>
-                                    <a href="{% url 'index' %}" class="dropdown-item">Cart Page</a>
-                                    <a href="{% url 'index' %}" class="dropdown-item">Checkout</a>
-                                    <a href="{% url 'index' %}" class="dropdown-item">404 Page</a>
-                            <a href="{#}" class="nav-item nav-link">Single Page</a>
-                            <div class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
-                                <div class="dropdown-menu m-0">
-                                    <a href="{#}" class="dropdown-item">Bestseller</a>
-                                    <a href="{% url 'index' %}" class="dropdown-item">Cart Page</a>
-                                    <a href="{#}" class="dropdown-item">Checkout</a>
-                                    <a href="{#}" class="dropdown-item">404 Page</a>
+                                    <a href="#" class="dropdown-item">Bestsellers</a>
+                                    <a href="{% url 'cart' %}" class="dropdown-item">Mi Carrito</a>
+                                    <a href="#" class="dropdown-item">Checkout</a>
+                                    <a href="#" class="dropdown-item">404</a>
                                 </div>
                             </div>
-                            <a href="{% url 'index' %}" class="nav-item nav-link me-2">Contact</a>
+                            <a href="{% url 'contact' %}" class="nav-item nav-link me-2">Contacto</a>
                             <div class="nav-item dropdown d-block d-lg-none mb-3">
-                                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">All Category</a>
+                                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Categorías</a>
                                 <div class="dropdown-menu m-0">
                                     <ul class="list-unstyled categories-bars">
                                         <li>
                                             <div class="categories-bars-item">
-                                                <a href="#">Accessories</a>
+                                                <a href="#">Accesorios</a>
                                                 <span>(3)</span>
                                             </div>
                                         </li>
                                         <li>
                                             <div class="categories-bars-item">
-                                                <a href="#">Electronics & Computer</a>
+                                                <a href="#">Electrónica y Computadoras</a>
                                                 <span>(5)</span>
                                             </div>
                                         </li>
                                         <li>
                                             <div class="categories-bars-item">
-                                                <a href="#">Laptops & Desktops</a>
+                                                <a href="#">Laptops y Desktops</a>
                                                 <span>(2)</span>
                                             </div>
                                         </li>
                                         <li>
                                             <div class="categories-bars-item">
-                                                <a href="#">Mobiles & Tablets</a>
+                                                <a href="#">Celulares y Tablets</a>
                                                 <span>(8)</span>
                                             </div>
                                         </li>
                                         <li>
                                             <div class="categories-bars-item">
-                                                <a href="#">SmartPhone & Smart TV</a>
+                                                <a href="#">Smartphones y Smart TV</a>
                                                 <span>(5)</span>
                                             </div>
                                         </li>
@@ -216,8 +200,7 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="" class="btn btn-secondary rounded-pill py-2 px-4 px-lg-3 mb-3 mb-md-3 mb-lg-0"><i
-                                class="fa fa-mobile-alt me-2"></i> +0123 456 7890</a>
+                        <a href="{% url 'login' %}" class="btn btn-secondary rounded-pill py-2 px-4 px-lg-3 mb-3 mb-md-3 mb-lg-0"><i class="fas fa-sign-in-alt me-2"></i>Iniciar Sesión</a>
                     </div>
                 </nav>
             </div>
